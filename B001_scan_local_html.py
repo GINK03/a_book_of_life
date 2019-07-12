@@ -1,7 +1,7 @@
 import glob
 from bs4 import BeautifulSoup as BS
 
-for fn in glob.glob('./books_*.html'):
+for fn in glob.glob('./outputs/books_*.html'):
     html = open(fn).read()
     soup = BS(html)
 

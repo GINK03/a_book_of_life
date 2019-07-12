@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.action_chains import ActionChains 
 from selenium.webdriver.common.by import By
 from selenium.webdriver import DesiredCapabilities
 import bs4
@@ -22,7 +22,9 @@ PASSWORD = os.environ['PASSWORD']
 def random_sleep():
     time.sleep(random.random())
 
+
 Path('outputs').mkdir(exist_ok=True)
+
 
 def run():
     options = Options()
@@ -60,10 +62,11 @@ def run():
         driver.find_element_by_id("signInSubmit").click()
     except Exception as ex:
         print(ex)
-
+    start = time.time()
     for i in range(20):
-        print(f'now iter {i}')
+        print(f'now iter {i} elapsed={time.time()-start}')
         random_sleep()
+        start = time.time()
         wait = WebDriverWait(driver, 300)
         elm = wait.until(EC.visibility_of_element_located(
             (By.XPATH, '//div[contains(@ng-show,"paginationThresholdReached")]//button')))
@@ -71,7 +74,7 @@ def run():
         driver.save_screenshot(f'outputs/fiona_{i:02d}.png')
         html = driver.page_source
         open(f'outputs/books_{i:02d}.html', 'w').write(html)
-        #driver.find_element_by_xpath('//div[contains(@ng-show,"paginationThresholdReached")]//button').click()
+        # driver.find_element_by_xpath('//div[contains(@ng-show,"paginationThresholdReached")]//button').click()
         elm.click()
 
 
