@@ -36,11 +36,14 @@ CPU_SIZE = int(os.environ['CPU_SIZE']) if os.environ.get('CPU_SIZE') else 16
 HTML_TIME_ROW = namedtuple(
     'HTML_TIME_ROW', ['html', 'time', 'url', 'status_code'])
 
+
 def scrape(arg):
     key, urls = arg
     options = Options()
-    Path(f'works/UserData_{HOSTNAME}_{key:02d}').mkdir(exist_ok=True, parents=True)
-    options.add_argument(f'--user-data-dir=works/UserData_{HOSTNAME}_{key:02d}')
+    Path(
+        f'works/UserData_{HOSTNAME}_{key:02d}').mkdir(exist_ok=True, parents=True)
+    options.add_argument(
+        f'--user-data-dir=works/UserData_{HOSTNAME}_{key:02d}')
     options.add_argument('--headless')
     options.add_argument(
         "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36")
@@ -50,21 +53,29 @@ def scrape(arg):
         "dnt=1")
     options.add_argument(
         "referer=http://www.google.com")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
     desired_capabilities = DesiredCapabilities.CHROME.copy()
     driver = webdriver.Chrome(chrome_options=options,
                               executable_path='/usr/local/bin/chromedriver',
                               desired_capabilities=desired_capabilities)
     driver.set_page_load_timeout(60)
-    driver.implicitly_wait(60) 
+    driver.implicitly_wait(60)
     driver.set_window_size(1080*3, 1080*6)
     ret = set()
     for url in urls:
         try:
-            if 'https://booklog.jp' not in url:
+            if not re.search('^https://booklog.jp', url):
                 continue
-            # 詳細レビューはスキップ
-            # if re.search(r'(https://booklog.jp/users/[a-zA-Z0-9]{1,}/archives.*?$)', url):
-            #    continue
+            # i 詳細レビューはスキップ
+            '''
+            '''
+            if re.search(r'(https://booklog.jp/users/[a-zA-Z0-9]{1,}/archives.*?$)', url):
+                continue
+            if re.search(r'(https://booklog.jp/item/.*?$)', url):
+                continue
+            if not re.search(r'(https://booklog.jp/users/[a-zA-Z0-9]{1,}$)', url):
+                continue
             start_time = time.time()
             if ffdb.exists(url) is True:
                 continue
@@ -72,13 +83,15 @@ def scrape(arg):
             scheme, netloc = (urlp.scheme, urlp.netloc)
             driver.get(url)
             if re.search(r'(https://booklog.jp/users/[a-zA-Z0-9]{1,}$)', url):
-                time.sleep(6.0)
+                time.sleep(8.0)
                 try:
-                    driver.save_screenshot(f'works/fiona_{HOSTNAME}_{key:02d}.png')
+                    ...
+                    # driver.save_screenshot(
+                    #    f'works/fiona_{HOSTNAME}_{key:02d}.png')
                 except Exception as ex:
                     ...
-            html  = driver.page_source
-            
+            html = driver.page_source
+
             status_code = 200
             soup = BeautifulSoup(html, features='lxml')
             if 'サーバーエラーが発生しました' in soup.title.text:
@@ -88,7 +101,7 @@ def scrape(arg):
                 html=html, time=datetime.datetime.now(), url=url, status_code=status_code)])
 
             for href in set([a.get('href') for a in soup.find_all('a', {'href': True})]):
-                #print(href)
+                # print(href)
                 urlpsub = urllib.parse.urlparse(href)
                 try:
                     if urlpsub.netloc == '':
@@ -122,9 +135,10 @@ def scrape(arg):
 def chunk_urls(urls):
     args = {}
     # あまり引数が多いと、メモリに乗らない
-    urls = list(urls)[:3000000]
-    CHUNK = max(CPU_SIZE, 1)
+    urls = list(urls)
     random.shuffle(urls)
+    #urls = urls[:300000]
+    CHUNK = max([100, CPU_SIZE, 1])
     for idx, url in enumerate(urls):
         key = idx % CHUNK
         if args.get(key) is None:
