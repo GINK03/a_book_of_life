@@ -12,8 +12,14 @@
 </div>
 
 ## Matrix Factorization
-　1990年台のNetflix Prizeからある伝統的な手法で、シンプルで動作が早く、ユーザが属性情報などを持たないときや、アイテムの数がとても多いときに有効な手法です。  
-　
+　1990年台のNetflix Prizeからある伝統的な手法で、シンプルで動作が早く、ユーザが多くアイテムの数がとても多いときに有効な手法です。  
+ 
+  DeepLearningでも実装できるし、sklearnなどでも関数が用意されています。  
+<div align="center">
+ <img width="100%" src="https://user-images.githubusercontent.com/4949982/61576638-529b0780-ab17-11e9-9a83-ae2a5b7bea26.png">
+</div>
+
+
 ## 自分のクエリとなる特徴量
 　自分のAmazon Fionaという特定のURLにアクセスると自分の今までKindleで買ってきた本がAjaxでレンダリングされます。   
 　Ajaxにより描画されていて、かつ、とても描画が遅いので普通の方法では自動取得できなく、google-chrome-headlessブラウザ等を利用してJSを実行しながら内容を取得できるようにします。  
@@ -59,13 +65,29 @@ $ python3 C001.py
 ```console
 $ cd MakeBookReadMatrix
 $ python3 D001.py --fit
+fit non-negative matrix factorization
+(1757, 1133108)
+test mse = 0.000107 # <- 今回のデータ・セットではこのくらい
 ```
 
 ## 推論
- Kindle Fionaから得られた本を、1*BOOK_NUMのMatrixに変形して、学習で作ったモデルに入力すると、各アイテム毎のレコメンドを行った際のウェイトを知ることができる。  
+ Kindle Fionaから得られた本を、1*BOOK_NUMのMatrixに変形して、学習で作ったモデルに入力すると、各アイテム毎のレコメンドを行った際のウェイトを知ることができる。 
 
 ## 結果
  TODO:書きつける
+
+## 依存(Ubuntuを想定)
+ - **google-chrome**
+```console
+$ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+$ sudo apt install ./google-chrome-stable_current_amd64.deb
+```
+ - **chrome-driver**
+```console
+$ wget https://chromedriver.storage.googleapis.com/75.0.3770.140/chromedriver_linux64.zip # google-chromeのversionに応じたものを使ってください
+$ unzip chromedriver_linux64.zip
+$ sudo mv chromedriver /usr/local/bin/
+```
  
 ## まとめ
 　自分の知識や体験の幅を広げるには、レコメンドでウェイトが付いているが、リコールを高めに見たときに低いウェイトの方に来ている本を読むと世界や価値観の広がりを高めることができているように思う。
