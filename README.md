@@ -89,7 +89,11 @@ $ wget https://chromedriver.storage.googleapis.com/75.0.3770.140/chromedriver_li
 $ unzip chromedriver_linux64.zip
 $ sudo mv chromedriver /usr/local/bin/
 ```
- 
+ - **requirements.txt**
+```console
+$ pip install -r requirements.txt
+``` 
+
 ## まとめ
 　自分の知識や体験の幅を広げるには、レコメンドでウェイトが付いているが、リコールを高めに見たときに低いウェイトの方に来ている本を読むと世界や価値観の広がりを高めることができているように思う。
 これは読書家が本の好き嫌いによらずに何かの賞をとった本を上から順番に読んでいくことで、自らの知識の幅を広げることから来ている。 
