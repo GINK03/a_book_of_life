@@ -17,17 +17,51 @@
 ## 自分のクエリとなる特徴量
 　自分のAmazon Fionaという特定のURLにアクセスると自分の今までKindleで買ってきた本がAjaxでレンダリングされます。   
 　Ajaxにより描画されていて、かつ、とても描画が遅いので普通の方法では自動取得できなく、google-chrome-headlessブラウザ等を利用してJSを実行しながら内容を取得できるようにします。  
+ - **購入した本の一覧が見えるページ**: https://amazon.co.jp/gp/digital/fiona/manage
+
+**実行コマンド**
+```console
+$ EMAIL=gim.kobayashi@gmail.com PASSWORD=***** python3 A001_from_kindle.py 
+```
+
+<div align="center">
+ <img width="400px" src="https://user-images.githubusercontent.com/4949982/61576073-ec5eb680-ab0f-11e9-9ad1-7467191d2929.png">
+</div>
 
 ## いろいろな人達の本棚の特徴量
 　レコメンドを行うには大量のデータが必要になります。   
-　他人の本棚が必要になるが、`https://booklog.jp/` が本棚SNSになっているのでこれを利用します。   　　 
+　他人の本棚が必要になるが、`https://booklog.jp/` が本棚SNSになっているのでこれを利用します。  
+ (すいません、スクレイピングしないと学習できないので、集めます)  
+**実行コマンド**
+```console
+$ cd DataCollection
+$ python3 A001_scrape.py
+```
+ 
 　現在120万ユーザが登録しているらしく、8万ユーザの本棚をサンプルして、本棚に登録されている本をウェイトを1として、読んでない本を0とすると、巨大な疎行列を作ることができます。scipyのlil_matrixという疎行列ライブラリを利用して構築すると、400Mbyte程度に収めることだできます。  
 
+<div align="center">
+ <img width="100%" src="https://user-images.githubusercontent.com/4949982/61576109-8c1c4480-ab10-11e9-8a80-c7166466c2af.png">
+</div>
+
+**実行コマンド**
+```console
+$ cd MakeBookReadMatrix
+$ python3 A001.py
+$ python3 B001.py
+$ python3 C001.py
+```
+
 ## 学習
-一応、Matrix Factorizationにも過学習という概念があるので、5%をtestとして切り出して、レコメンドしたときのMatrixとのMean Square Errorを小さくする。
+一応、Matrix Factorizationにも過学習という概念があるので、2%をtestとして切り出して、ホールドアウトで、レコメンドしたときのMatrixとのMean Square Errorを小さくします。  
+**実行コマンド**
+```console
+$ cd MakeBookReadMatrix
+$ python3 D001.py
+```
 
 ## 推論
- Kindle Fionaから得られた本を、1*BOOK_NUMのMatrixに変形して、学習で作ったもでるに入力すると、各アイテム毎のレコメンドを行った際のウェイトを知ることができる。  
+ Kindle Fionaから得られた本を、1*BOOK_NUMのMatrixに変形して、学習で作ったモデルに入力すると、各アイテム毎のレコメンドを行った際のウェイトを知ることができる。  
 
 ## 結果
  TODO:書きつける
