@@ -59,10 +59,13 @@ $ python3 C001.py
 ```console
 $ cd MakeBookReadMatrix
 $ python3 D001.py --fit
+fit non-negative matrix factorization
+(1757, 1133108)
+test mse = 0.000107 # <- 今回のデータ・セットではこのくらい
 ```
 
 ## 推論
- Kindle Fionaから得られた本を、1*BOOK_NUMのMatrixに変形して、学習で作ったモデルに入力すると、各アイテム毎のレコメンドを行った際のウェイトを知ることができる。  
+ Kindle Fionaから得られた本を、1*BOOK_NUMのMatrixに変形して、学習で作ったモデルに入力すると、各アイテム毎のレコメンドを行った際のウェイトを知ることができる。 
 
 ## 結果
  TODO:書きつける
