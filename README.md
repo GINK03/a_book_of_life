@@ -7,7 +7,9 @@
 
 ## 会社の技術共有会の小話で話した話
 
+<div>
 <iframe src="https://onedrive.live.com/embed?cid=ECE5548EEB0F5802&amp;resid=ECE5548EEB0F5802%21115549&amp;authkey=ALWlrWJS0n3WgPM&amp;em=2&amp;wdAr=1.7777777777777777" width="1186px" height="691px" frameborder="0">これは、<a target="_blank" href="https://office.com/webapps">Office Online</a> の機能を利用した、<a target="_blank" href="https://office.com">Microsoft Office</a> の埋め込み型のプレゼンテーションです。</iframe>
+</div>
 
 ## Matrix Factorization
 　1990年台のNetflix Prizeからある伝統的な手法で、シンプルで動作が早く、ユーザが属性情報などを持たないときや、アイテムの数がとても多いときに有効な手法です。  
