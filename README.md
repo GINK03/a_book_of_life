@@ -26,6 +26,7 @@ $ EMAIL=gim.kobayashi@gmail.com PASSWORD=***** python3 A001_from_kindle.py
 
 <div align="center">
  <img width="400px" src="https://user-images.githubusercontent.com/4949982/61576073-ec5eb680-ab0f-11e9-9ad1-7467191d2929.png">
+ <div> fionaのURLをアクセスするとAjaxでこのように描画される </div>
 </div>
 
 ## いろいろな人達の本棚の特徴量
@@ -57,7 +58,7 @@ $ python3 C001.py
 **実行コマンド**
 ```console
 $ cd MakeBookReadMatrix
-$ python3 D001.py
+$ python3 D001.py --fit
 ```
 
 ## 推論
