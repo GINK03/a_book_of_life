@@ -67,15 +67,15 @@ def scrape(arg):
         try:
             if not re.search('^https://booklog.jp', url):
                 continue
+            '''
             # i 詳細レビューはスキップ
-            '''
-            '''
             if re.search(r'(https://booklog.jp/users/[a-zA-Z0-9]{1,}/archives.*?$)', url):
                 continue
             if re.search(r'(https://booklog.jp/item/.*?$)', url):
                 continue
             if not re.search(r'(https://booklog.jp/users/[a-zA-Z0-9]{1,}$)', url):
                 continue
+            '''
             start_time = time.time()
             if ffdb.exists(url) is True:
                 continue
@@ -84,17 +84,11 @@ def scrape(arg):
             driver.get(url)
             if re.search(r'(https://booklog.jp/users/[a-zA-Z0-9]{1,}$)', url):
                 time.sleep(8.0)
-                try:
-                    ...
-                    # driver.save_screenshot(
-                    #    f'works/fiona_{HOSTNAME}_{key:02d}.png')
-                except Exception as ex:
-                    ...
             html = driver.page_source
 
             status_code = 200
             soup = BeautifulSoup(html, features='lxml')
-            if 'サーバーエラーが発生しました' in soup.title.text:
+            if 'サーバーエラーが発生しました' in str(soup.title):
                 continue
 
             ffdb.save(key=url, val=[HTML_TIME_ROW(
@@ -116,7 +110,7 @@ def scrape(arg):
                 ret.add(urlpsub.geturl())
 
             time.sleep(DELAY_TIME)
-            print(f'done@{key:03d}', url, soup.title.text,
+            print(f'done@{key:03d}', url, str(soup.title),
                   f'elapsed={time.time() - start_time:0.04f}')
         except Exception as ex:
             print('err', url, ex)
