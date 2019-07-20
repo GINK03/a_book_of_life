@@ -18,7 +18,8 @@
 <div align="center">
  <img width="100%" src="https://user-images.githubusercontent.com/4949982/61576638-529b0780-ab17-11e9-9a83-ae2a5b7bea26.png">
 </div>
-　
+
+
 ## 自分のクエリとなる特徴量
 　自分のAmazon Fionaという特定のURLにアクセスると自分の今までKindleで買ってきた本がAjaxでレンダリングされます。   
 　Ajaxにより描画されていて、かつ、とても描画が遅いので普通の方法では自動取得できなく、google-chrome-headlessブラウザ等を利用してJSを実行しながら内容を取得できるようにします。  
