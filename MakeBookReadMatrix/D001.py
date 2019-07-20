@@ -19,15 +19,14 @@ if '--fit' in sys.argv:
     print(yhat.shape)
     mse = mean_squared_error(csrTest.todense(), yhat)
     print(f'test mse = {mse:0.06f}')
-
     with open('./works/models.pkl', 'wb') as fp:
         pickle.dump(model, fp)
-
+    exit(1)
 assert Path('./works/models.pkl').exists(), "there is not model."
 
 with open('./works/models.pkl', 'rb') as fp:
     model = pickle.load(fp)
-for sidx, source_json in enumerate(['./sort_source_books.json', '../MakeBookReadMatrix/works/each_shelve/0000523d86c03863']):
+for sidx, source_json in enumerate(['./sort_source_books.json']): #, '../MakeBookReadMatrix/works/each_shelve/0000523d86c03863']):
     if sidx == 0:
         source = json.load(open(source_json))
     else:
