@@ -11,7 +11,7 @@
 </div>
 
 ## Matrix Factorization
-　1990年台のNetflix Prizeからある伝統的な手法で、シンプルで動作が早く、ユーザが多くアイテムの数がとても多いときに有効な手法です。  
+　2000年台のNetflix Prizeからある伝統的な手法で、シンプルで動作が早く、ユーザが多くアイテムの数がとても多いときに有効な手法です。  
  
   DeepLearningでも実装できるし、sklearnなどでも関数が用意されています。  
 <div align="center">
