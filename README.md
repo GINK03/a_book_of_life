@@ -75,6 +75,19 @@ test mse = 0.000107 # <- 今回のデータ・セットではこのくらい
 
 ## 結果
  TODO:書きつける
+
+## 依存(Ubuntuを想定)
+ - **google-chrome**
+```console
+$ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+$ sudo apt install ./google-chrome-stable_current_amd64.deb
+```
+ - **chrome-driver**
+```console
+$ wget https://chromedriver.storage.googleapis.com/75.0.3770.140/chromedriver_linux64.zip # google-chromeのversionに応じたものを使ってください
+$ unzip chromedriver_linux64.zip
+$ sudo mv chromedriver /usr/local/bin/
+```
  
 ## まとめ
 　自分の知識や体験の幅を広げるには、レコメンドでウェイトが付いているが、リコールを高めに見たときに低いウェイトの方に来ている本を読むと世界や価値観の広がりを高めることができているように思う。
