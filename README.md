@@ -19,6 +19,8 @@
  <img width="100%" src="https://user-images.githubusercontent.com/4949982/61576638-529b0780-ab17-11e9-9a83-ae2a5b7bea26.png">
 </div>
 
+## コード
+[https://github.com/GINK03/a_book_of_life:embed]
 
 ## 自分のクエリとなる特徴量
 　自分のAmazon Fionaという特定のURLにアクセスると自分の今までKindleで買ってきた本がAjaxでレンダリングされます。   
@@ -27,7 +29,7 @@
 
 **実行コマンド**
 ```console
-$ EMAIL=gim.kobayashi@gmail.com PASSWORD=***** python3 A001_from_kindle.py 
+$ EMAIL=*****@gmail.com PASSWORD=***** python3 A001_from_kindle.py 
 $ python3 B001_scan_local_html.py
 ```
 
