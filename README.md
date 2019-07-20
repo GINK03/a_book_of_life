@@ -28,6 +28,7 @@
 **実行コマンド**
 ```console
 $ EMAIL=gim.kobayashi@gmail.com PASSWORD=***** python3 A001_from_kindle.py 
+$ python3 B001_scan_local_html.py
 ```
 
 <div align="center">
